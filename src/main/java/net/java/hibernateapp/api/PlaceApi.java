@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
-@RequestMapping("/places")
+@RequestMapping("/api/places")
 public class PlaceApi {
-    
+
     private final PlaceService placeService;
 
     public PlaceApi(PlaceService placeService) {
