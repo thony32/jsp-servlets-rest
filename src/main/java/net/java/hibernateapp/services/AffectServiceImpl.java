@@ -2,7 +2,6 @@ package net.java.hibernateapp.services;
 
 import net.java.hibernateapp.entities.Affect;
 import net.java.hibernateapp.repositories.AffectRepository;
-import net.java.hibernateapp.services.AffectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -13,7 +12,6 @@ public class AffectServiceImpl implements AffectService {
 
     private final AffectRepository affectRepository;
 
-    @Autowired
     public AffectServiceImpl(AffectRepository affectRepository) {
         this.affectRepository = affectRepository;
     }

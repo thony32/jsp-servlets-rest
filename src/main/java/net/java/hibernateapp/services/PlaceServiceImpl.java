@@ -1,6 +1,7 @@
 package net.java.hibernateapp.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import net.java.hibernateapp.entities.Place;
 import net.java.hibernateapp.repositories.PlaceRepository;
@@ -8,6 +9,7 @@ import net.java.hibernateapp.repositories.PlaceRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PlaceServiceImpl implements PlaceService {
     private final PlaceRepository placeRepository;
 

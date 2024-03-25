@@ -2,7 +2,6 @@ package net.java.hibernateapp.api;
 
 import net.java.hibernateapp.entities.Affect;
 import net.java.hibernateapp.services.AffectService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +14,6 @@ public class AffectApi {
 
     private final AffectService affectService;
 
-    @Autowired
     public AffectApi(AffectService affectService) {
         this.affectService = affectService;
     }
@@ -49,7 +47,6 @@ public class AffectApi {
         return ResponseEntity.notFound().build();
     }
 
-    // Endpoint to find affects by employee code
     @GetMapping("/employee/{codeEmployee}")
     public ResponseEntity<List<Affect>> getAffectsByEmployeeCode(@PathVariable("codeEmployee") Integer codeEmployee) {
         List<Affect> affects = affectService.findByEmployeeCode(codeEmployee);
