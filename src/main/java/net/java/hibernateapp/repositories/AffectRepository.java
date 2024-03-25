@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface AffectRepository extends JpaRepository<Affect, Long> {
+public interface AffectRepository extends JpaRepository<Affect, Integer> {
     @Query("SELECT a FROM Affect a WHERE a.employee.codeEmployee = :codeEmployee")
     List<Affect> findByEmployeeCode(@Param("codeEmployee") Integer codeEmployee);
 }
