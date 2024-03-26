@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor
 @Table(name="places")
 public class Place {

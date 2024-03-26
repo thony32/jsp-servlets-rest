@@ -1,7 +1,13 @@
 package net.java.hibernateapp.api;
 
+import net.java.hibernateapp.dto.AffectDTO;
 import net.java.hibernateapp.entities.Affect;
+import net.java.hibernateapp.entities.Employee;
+import net.java.hibernateapp.entities.Place;
 import net.java.hibernateapp.services.AffectService;
+import net.java.hibernateapp.services.EmployeeService;
+import net.java.hibernateapp.services.PlaceService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +20,30 @@ import java.util.Optional;
 public class AffectApi {
 
     private final AffectService affectService;
+    private final EmployeeService employeeService;
+    private final PlaceService placeService;
 
-    public AffectApi(AffectService affectService) {
+    public AffectApi(AffectService affectService, EmployeeService employeeService, PlaceService placeService) {
         this.affectService = affectService;
+        this.employeeService = employeeService;
+        this.placeService = placeService;
     }
 
     @PostMapping
-    public ResponseEntity<Affect> createAffect(@RequestBody Affect affect) {
+    public ResponseEntity<?> createAffect(@RequestBody AffectDTO affectDTO) {
+
+        Optional<Employee> employee = employeeService.findByCodeEmployee(affectDTO.getEmployeeId());
+        Optional<Place> place = placeService.findByCodePlace(affectDTO.getPlaceId());
+
+        if (!employee.isPresent() || !place.isPresent()) {
+            return ResponseEntity.badRequest().body("Employee ou Place introuvable");
+        }
+
+        Affect affect = new Affect();
+        affect.setEmployee(employee.get());
+        affect.setPlace(place.get());
+        affect.setDate(affectDTO.getDate());
+
         Affect savedAffect = affectService.save(affect);
         return ResponseEntity.ok(savedAffect);
     }
