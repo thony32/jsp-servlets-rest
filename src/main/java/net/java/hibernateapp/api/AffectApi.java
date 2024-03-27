@@ -11,6 +11,8 @@ import net.java.hibernateapp.services.PlaceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +48,28 @@ public class AffectApi {
 
         Affect savedAffect = affectService.save(affect);
         return ResponseEntity.ok(savedAffect);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateAffect(@PathVariable("id") Integer id, @RequestBody AffectDTO affectDTO) {
+        Optional<Employee> employee = employeeService.findByCodeEmployee(affectDTO.getEmployeeId());
+        Optional<Place> place = placeService.findByCodePlace(affectDTO.getPlaceId());
+
+        if (!employee.isPresent() || !place.isPresent()) {
+            return ResponseEntity.badRequest().body("Employé ou Place introuvable");
+        }
+
+        Affect affectToUpdate = new Affect();
+        affectToUpdate.setEmployee(employee.get());
+        affectToUpdate.setPlace(place.get());
+        affectToUpdate.setDate(affectDTO.getDate());
+
+        try {
+            Affect updatedAffect = affectService.update(id, affectToUpdate);
+            return ResponseEntity.ok(updatedAffect);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{id}")

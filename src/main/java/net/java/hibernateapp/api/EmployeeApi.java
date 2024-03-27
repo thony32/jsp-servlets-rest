@@ -61,11 +61,8 @@ public class EmployeeApi {
 
     @GetMapping("/search")
     public ResponseEntity<List<Employee>> searchEmployees(
-            @RequestParam(value = "code", required = false) Integer codeEmployee,
-            @RequestParam(value = "lastName", required = false) String lastName,
-            @RequestParam(value = "firstName", required = false) String firstName) {
-        List<Employee> employees = employeeService.findByCodeEmployeeOrLastNameOrFirstName(codeEmployee, lastName,
-                firstName);
+            @RequestParam(value = "search", required = false) String search) {
+        List<Employee> employees = employeeService.findByCodeEmployeeOrLastNameOrFirstName(search);
         return ResponseEntity.ok(employees);
     }
 }

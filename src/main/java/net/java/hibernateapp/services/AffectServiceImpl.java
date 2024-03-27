@@ -2,8 +2,10 @@ package net.java.hibernateapp.services;
 
 import net.java.hibernateapp.entities.Affect;
 import net.java.hibernateapp.repositories.AffectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.persistence.EntityNotFoundException;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,18 @@ public class AffectServiceImpl implements AffectService {
 
     @Override
     public Affect save(Affect affect) {
+        return affectRepository.save(affect);
+    }
+
+    @Override
+    public Affect update(Integer id, Affect affectDetails) {
+        Affect affect = affectRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Affect not found with id " + id));
+
+        affect.setEmployee(affectDetails.getEmployee());
+        affect.setPlace(affectDetails.getPlace());
+        affect.setDate(affectDetails.getDate());
+
         return affectRepository.save(affect);
     }
 

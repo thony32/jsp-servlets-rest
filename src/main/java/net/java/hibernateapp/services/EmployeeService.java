@@ -14,7 +14,7 @@ public interface EmployeeService {
 
     Optional<Employee> findByCodeEmployee(Integer codeEmployee);
 
-    List<Employee> findByCodeEmployeeOrLastNameOrFirstName(Integer codeEmployee, String lastName, String firstName);
+    List<Employee> findByCodeEmployeeOrLastNameOrFirstName(String search);
 
     Employee update(Employee employee);
 }

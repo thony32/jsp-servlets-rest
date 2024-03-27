@@ -37,9 +37,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> findByCodeEmployeeOrLastNameOrFirstName(Integer codeEmployee, String lastName,
-            String firstName) {
-        return employeeRepository.findByCodeEmployeeOrLastNameOrFirstName(codeEmployee, lastName, firstName);
+    public List<Employee> findByCodeEmployeeOrLastNameOrFirstName(String search) {
+        return employeeRepository.findByCodeEmployeeOrLastNameOrFirstName(search);
     }
 
     @Override

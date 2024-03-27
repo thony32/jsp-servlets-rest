@@ -11,6 +11,8 @@ public interface AffectService {
 
     List<Affect> findAll();
 
+    Affect update(Integer id, Affect affects);
+
     Optional<Affect> findById(Integer id);
 
     List<Affect> findByEmployeeCode(Integer codeEmployee);
