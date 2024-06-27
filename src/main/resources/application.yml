@@ -10,7 +10,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://0.0.0.0:5432/hibernate
-    username: thony32
+    username: root
     password: zerovalo
 server:
   port: 8081
